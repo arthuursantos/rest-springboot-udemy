@@ -26,9 +26,9 @@ public class CustomizedResponseEntityExceptionHandler extends ResponseEntityExce
         return new ResponseEntity<>(error, status);
     }
 
-    @ExceptionHandler(UnsupportedMathOperationException.class)
-    public ResponseEntity<StandardError> handleBadRequestExceptions(Exception ex, HttpServletRequest request) {
-        HttpStatus status = HttpStatus.BAD_REQUEST;
+    @ExceptionHandler(ResourceNotFoundException.class)
+    public ResponseEntity<StandardError> handleNotFoundExceptions(Exception ex, HttpServletRequest request) {
+        HttpStatus status = HttpStatus.NOT_FOUND;
         StandardError error = StandardError.builder()
                 .timestamp(Instant.now())
                 .status(status.value())

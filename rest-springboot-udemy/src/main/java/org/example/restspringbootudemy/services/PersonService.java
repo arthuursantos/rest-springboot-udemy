@@ -1,9 +1,11 @@
 package org.example.restspringbootudemy.services;
 
+import org.example.restspringbootudemy.controllers.exceptions.ResourceNotFoundException;
 import org.example.restspringbootudemy.entities.Person;
+import org.example.restspringbootudemy.repositories.PersonRepository;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.atomic.AtomicLong;
 import java.util.logging.Logger;
@@ -11,50 +13,43 @@ import java.util.logging.Logger;
 @Service
 public class PersonService {
 
-   private final AtomicLong counter = new AtomicLong();
-   private Logger logger = Logger.getLogger(PersonService.class.getName());
+    @Autowired
+    private PersonRepository repository;
 
-    private Person mockPerson(int i) {
-        return Person.builder()
-                .id(counter.incrementAndGet())
-                .firstName("FirstName " + i)
-                .lastName("LastName " + i)
-                .email("Email " + i)
-                .address("Address " + i)
-                .build();
+    private Logger logger = Logger.getLogger(PersonService.class.getName());
+
+    public List<Person> findAll() {
+        logger.info("Finding all persons");
+        return repository.findAll();
     }
 
-   public List<Person> findAll() {
-       List<Person> persons = new ArrayList<>();
-       for (int i = 1; i <= 10; i++) {
-           persons.add(mockPerson(i));
-       }
-       return persons;
-   }
+    public Person findById(Long id) {
+        logger.info("Finding person by id " + id);
+        return repository.findById(id)
+                .orElseThrow(() -> new ResourceNotFoundException("No records found for this ID."));
+    }
 
-    public Person findById(String id) {
-       logger.info("Finding person by id: " + id);
-       return Person.builder()
-               .id(counter.incrementAndGet())
-               .firstName("Arthur")
-               .lastName("Santos")
-               .email("arthur.santos@gmail.com")
-               .address("Rua Dom José, 774")
-               .build();
-   }
-
-   public Person createPerson(Person person) {
+    public Person createPerson(Person person) {
         logger.info("Creating person!");
-        return person;
-   }
+        return repository.save(person);
+    }
 
-   public Person updatePerson(Person person) {
+    public Person updatePerson(Person person) {
         logger.info("Updating person: " + person.getId());
-        return person;
-   }
+        Person entity = repository.findById(person.getId())
+                .orElseThrow(() -> new ResourceNotFoundException("No records found for this ID."));
+        entity.setFirstName(person.getFirstName());
+        entity.setLastName(person.getLastName());
+        entity.setEmail(person.getEmail());
+        entity.setAddress(person.getAddress());
+        return repository.save(entity);
+    }
 
-   public void deletePerson(String id) {
+    public void deletePerson(Long id) {
         logger.info("Deleting person: " + id);
-   }
+        Person entity = repository.findById(id)
+                .orElseThrow(() -> new ResourceNotFoundException("No records found for this ID."));
+        repository.delete(entity);
+    }
 
 }
