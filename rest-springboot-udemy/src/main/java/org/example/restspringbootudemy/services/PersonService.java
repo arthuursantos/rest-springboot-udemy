@@ -2,8 +2,10 @@ package org.example.restspringbootudemy.services;
 
 import org.example.restspringbootudemy.controllers.exceptions.ResourceNotFoundException;
 import org.example.restspringbootudemy.data.vo.v1.PersonVO;
+import org.example.restspringbootudemy.data.vo.v2.PersonVOv2;
 import org.example.restspringbootudemy.entities.Person;
 import org.example.restspringbootudemy.mapper.DozerMapper;
+import org.example.restspringbootudemy.mapper.PersonMapper;
 import org.example.restspringbootudemy.repositories.PersonRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -16,6 +18,9 @@ public class PersonService {
 
     @Autowired
     private PersonRepository repository;
+
+    @Autowired
+    private PersonMapper mapper;
 
     private Logger logger = Logger.getLogger(PersonService.class.getName());
 
@@ -35,6 +40,12 @@ public class PersonService {
         logger.info("Creating person!");
         Person entity = DozerMapper.parseObject(person, Person.class);
         return DozerMapper.parseObject(repository.save(entity), PersonVO.class);
+    }
+
+    public PersonVOv2 createPersonV2(PersonVOv2 person) {
+        logger.info("Creating person!");
+        Person entity = mapper.convertPersonVoToPerson(person);
+        return mapper.convertPersonToPersonVO(repository.save(entity));
     }
 
     public PersonVO updatePerson(PersonVO person) {

@@ -1,6 +1,7 @@
 package org.example.restspringbootudemy.controllers;
 
 import org.example.restspringbootudemy.data.vo.v1.PersonVO;
+import org.example.restspringbootudemy.data.vo.v2.PersonVOv2;
 import org.example.restspringbootudemy.entities.Person;
 import org.example.restspringbootudemy.services.PersonService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -30,6 +31,11 @@ public class PersonController {
     @PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<PersonVO> create(@RequestBody PersonVO person) {
         return ResponseEntity.ok().body(service.createPerson(person));
+    }
+
+    @PostMapping(value = "/v2",consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<PersonVOv2> create(@RequestBody PersonVOv2 person) {
+        return ResponseEntity.ok().body(service.createPersonV2(person));
     }
 
     @PutMapping(consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
