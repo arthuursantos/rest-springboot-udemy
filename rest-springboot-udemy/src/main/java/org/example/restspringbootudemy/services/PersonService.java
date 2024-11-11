@@ -42,11 +42,11 @@ public class PersonService {
         return DozerMapper.parseObject(repository.save(entity), PersonVO.class);
     }
 
-    public PersonVOv2 createPersonV2(PersonVOv2 person) {
-        logger.info("Creating person!");
-        Person entity = mapper.convertPersonVoToPerson(person);
-        return mapper.convertPersonToPersonVO(repository.save(entity));
-    }
+//    public PersonVOv2 createPersonV2(PersonVOv2 person) {
+//        logger.info("Creating person!");
+//        Person entity = mapper.convertPersonVoToPerson(person);
+//        return mapper.convertPersonToPersonVO(repository.save(entity));
+//    }
 
     public PersonVO updatePerson(PersonVO person) {
         logger.info("Updating person: " + person.getId());
