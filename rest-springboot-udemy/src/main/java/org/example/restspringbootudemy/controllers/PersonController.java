@@ -1,11 +1,9 @@
 package org.example.restspringbootudemy.controllers;
 
 import org.example.restspringbootudemy.data.vo.v1.PersonVO;
-import org.example.restspringbootudemy.data.vo.v2.PersonVOv2;
-import org.example.restspringbootudemy.entities.Person;
 import org.example.restspringbootudemy.services.PersonService;
+import org.example.restspringbootudemy.util.MediaType;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -18,17 +16,18 @@ public class PersonController {
     @Autowired
     private PersonService service;
 
-    @GetMapping(produces = MediaType.APPLICATION_JSON_VALUE)
+    @GetMapping(produces = {MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML, MediaType.APPLICATION_YAML})
     public ResponseEntity<List<PersonVO>> findAll() {
         return ResponseEntity.ok().body(service.findAll());
     }
 
-    @GetMapping(value = "/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
+    @GetMapping(value = "/{id}", produces = {MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML, MediaType.APPLICATION_YAML})
     public ResponseEntity<PersonVO> findById(@PathVariable Long id) {
         return ResponseEntity.ok().body(service.findById(id));
     }
 
-    @PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
+    @PostMapping(consumes = {MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML, MediaType.APPLICATION_YAML},
+            produces = {MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML, MediaType.APPLICATION_YAML})
     public ResponseEntity<PersonVO> create(@RequestBody PersonVO person) {
         return ResponseEntity.ok().body(service.createPerson(person));
     }
@@ -38,7 +37,8 @@ public class PersonController {
 //        return ResponseEntity.ok().body(service.createPersonV2(person));
 //    }
 
-    @PutMapping(consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
+    @PutMapping(consumes = {MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML, MediaType.APPLICATION_YAML},
+            produces = {MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML, MediaType.APPLICATION_YAML})
     public ResponseEntity<PersonVO> update(@RequestBody PersonVO person) {
         return ResponseEntity.ok().body(service.updatePerson(person));
     }
