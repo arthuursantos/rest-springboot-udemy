@@ -1,7 +1,11 @@
 package org.example.restspringbootudemy.data.vo.v1;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.annotation.JsonPropertyOrder;
+import com.github.dozermapper.core.Mapping;
 import lombok.*;
 import org.hibernate.proxy.HibernateProxy;
+import org.springframework.hateoas.RepresentationModel;
 
 import java.io.Serializable;
 import java.util.Objects;
@@ -13,10 +17,13 @@ import java.util.Objects;
 @AllArgsConstructor
 @Builder
 
-public class PersonVO implements Serializable {
+@JsonPropertyOrder({"id","firstName","lastName","address","email"})
+public class PersonVO extends RepresentationModel<PersonVO> implements Serializable {
     private static final long serialVersionUID = 1L;
 
-    private Long id;
+    @JsonProperty("id")
+    @Mapping("id")
+    private Long key;
     private String firstName;
     private String lastName;
     private String address;
@@ -30,7 +37,7 @@ public class PersonVO implements Serializable {
         Class<?> thisEffectiveClass = this instanceof HibernateProxy ? ((HibernateProxy) this).getHibernateLazyInitializer().getPersistentClass() : this.getClass();
         if (thisEffectiveClass != oEffectiveClass) return false;
         PersonVO person = (PersonVO) o;
-        return getId() != null && Objects.equals(getId(), person.getId());
+        return getKey() != null && Objects.equals(getKey(), person.getKey());
     }
 
     @Override
