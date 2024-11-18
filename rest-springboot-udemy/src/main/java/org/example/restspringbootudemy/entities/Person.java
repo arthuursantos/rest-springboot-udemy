@@ -1,6 +1,5 @@
 package org.example.restspringbootudemy.entities;
 
-import com.github.dozermapper.core.Mapping;
 import jakarta.persistence.*;
 import lombok.*;
 import org.hibernate.proxy.HibernateProxy;

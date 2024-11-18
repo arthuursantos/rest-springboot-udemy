@@ -32,7 +32,7 @@ public class PersonController {
             consumes = {MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML, MediaType.APPLICATION_YAML},
             produces = {MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML, MediaType.APPLICATION_YAML})
     public ResponseEntity<PersonVO> create(@RequestBody PersonVO person) {
-        return ResponseEntity.ok().body(service.createPerson(person));
+        return ResponseEntity.ok().body(service.create(person));
     }
 
 //    @PostMapping(value = "/v2",consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
@@ -44,12 +44,12 @@ public class PersonController {
             consumes = {MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML, MediaType.APPLICATION_YAML},
             produces = {MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML, MediaType.APPLICATION_YAML})
     public ResponseEntity<PersonVO> update(@RequestBody PersonVO person) {
-        return ResponseEntity.ok().body(service.updatePerson(person));
+        return ResponseEntity.ok().body(service.update(person));
     }
 
     @DeleteMapping(value = "/{id}")
     public ResponseEntity<?> delete(@PathVariable Long id) {
-        service.deletePerson(id);
+        service.delete(id);
         return ResponseEntity.noContent().build();
     }
 

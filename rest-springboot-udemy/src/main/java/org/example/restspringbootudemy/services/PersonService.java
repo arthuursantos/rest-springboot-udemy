@@ -1,6 +1,7 @@
 package org.example.restspringbootudemy.services;
 
 import org.example.restspringbootudemy.controllers.PersonController;
+import org.example.restspringbootudemy.controllers.exceptions.RequiredObjectIsNullException;
 import org.example.restspringbootudemy.controllers.exceptions.ResourceNotFoundException;
 import org.example.restspringbootudemy.data.vo.v1.PersonVO;
 import org.example.restspringbootudemy.entities.Person;
@@ -40,7 +41,8 @@ public class PersonService {
         return vo;
     }
 
-    public PersonVO createPerson(PersonVO person) {
+    public PersonVO create(PersonVO person) {
+        if (person == null) throw new RequiredObjectIsNullException();
         logger.info("Creating person!");
         Person entity = DozerMapper.parseObject(person, Person.class);
         PersonVO vo = DozerMapper.parseObject(repository.save(entity), PersonVO.class);
@@ -54,7 +56,8 @@ public class PersonService {
 //        return mapper.convertPersonToPersonVO(repository.save(entity));
 //    }
 
-    public PersonVO updatePerson(PersonVO person) {
+    public PersonVO update(PersonVO person) {
+        if (person == null) throw new RequiredObjectIsNullException();
         logger.info("Updating person: " + person.getKey());
         Person entity = repository.findById(person.getKey())
                 .orElseThrow(() -> new ResourceNotFoundException("No records found for this ID."));
@@ -67,7 +70,7 @@ public class PersonService {
         return vo;
     }
 
-    public void deletePerson(Long id) {
+    public void delete(Long id) {
         logger.info("Deleting person: " + id);
         Person entity = repository.findById(id)
                 .orElseThrow(() -> new ResourceNotFoundException("No records found for this ID."));
