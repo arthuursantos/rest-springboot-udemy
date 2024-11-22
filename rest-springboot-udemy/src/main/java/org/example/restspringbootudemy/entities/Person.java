@@ -9,10 +9,8 @@ import java.util.Objects;
 
 @Getter
 @Setter
-@ToString
 @NoArgsConstructor
 @AllArgsConstructor
-@Builder
 
 @Entity
 @Table(name = "person")
@@ -30,8 +28,6 @@ public class Person implements Serializable {
     private String address;
     @Column(nullable = false, length = 50)
     private String email;
-//    @Column(length = 15)
-//    private String phone;
 
     @Override
     public final boolean equals(Object o) {

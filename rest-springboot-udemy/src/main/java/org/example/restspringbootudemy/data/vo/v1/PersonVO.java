@@ -14,7 +14,6 @@ import java.util.Objects;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-@Builder
 
 @JsonPropertyOrder({"id","firstName","lastName","address","email"})
 public class PersonVO extends RepresentationModel<PersonVO> implements Serializable {

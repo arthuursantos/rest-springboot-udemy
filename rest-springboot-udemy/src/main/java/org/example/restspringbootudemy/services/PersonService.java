@@ -25,7 +25,7 @@ public class PersonService {
     private Logger logger = Logger.getLogger(PersonService.class.getName());
 
     public List<PersonVO> findAll() {
-        logger.info("Finding all persons");
+        logger.info("Finding all Person");
         var persons = DozerMapper.parseList(repository.findAll(), PersonVO.class);
         persons
                 .forEach(p -> p.add(linkTo(methodOn(PersonController.class).findById(p.getKey())).withSelfRel()));
@@ -33,7 +33,7 @@ public class PersonService {
     }
 
     public PersonVO findById(Long id) {
-        logger.info("Finding person by id " + id);
+        logger.info("Finding Person by IO " + id);
         Person entity = repository.findById(id)
                 .orElseThrow(() -> new ResourceNotFoundException("No records found for this ID."));
         PersonVO vo = DozerMapper.parseObject(entity, PersonVO.class);
@@ -49,12 +49,6 @@ public class PersonService {
         vo.add(linkTo(methodOn(PersonController.class).findById(vo.getKey())).withSelfRel());
         return vo;
     }
-
-//    public PersonVOv2 createPersonV2(PersonVOv2 person) {
-//        logger.info("Creating person!");
-//        Person entity = mapper.convertPersonVoToPerson(person);
-//        return mapper.convertPersonToPersonVO(repository.save(entity));
-//    }
 
     public PersonVO update(PersonVO person) {
         if (person == null) throw new RequiredObjectIsNullException();
