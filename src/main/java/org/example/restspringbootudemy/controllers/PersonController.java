@@ -80,11 +80,6 @@ public class PersonController {
         return ResponseEntity.ok().body(service.create(person));
     }
 
-//    @PostMapping(value = "/v2",consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
-//    public ResponseEntity<PersonVOv2> create(@RequestBody PersonVOv2 person) {
-//        return ResponseEntity.ok().body(service.createPersonV2(person));
-//    }
-
     @PutMapping(
             consumes = {MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML, MediaType.APPLICATION_YAML},
             produces = {MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML, MediaType.APPLICATION_YAML})
