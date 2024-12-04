@@ -6,9 +6,9 @@ import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.tags.Tag;
-import org.example.restspringbootudemy.data.vo.v1.PersonVO;
+import org.example.restspringbootudemy.dto.PersonVO;
 import org.example.restspringbootudemy.services.PersonService;
-import org.example.restspringbootudemy.util.MediaType;
+import org.example.restspringbootudemy.config.serialization.MediaType;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -16,7 +16,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping(value = "/api/person/v1")
+@RequestMapping(value = "/api/person")
 @Tag(name = "Person", description = "Endpoints for managing Person")
 public class PersonController {
 

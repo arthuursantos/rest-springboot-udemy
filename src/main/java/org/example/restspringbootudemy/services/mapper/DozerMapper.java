@@ -1,4 +1,4 @@
-package org.example.restspringbootudemy.mapper;
+package org.example.restspringbootudemy.services.mapper;
 
 import com.github.dozermapper.core.DozerBeanMapperBuilder;
 import com.github.dozermapper.core.Mapper;

@@ -1,6 +1,6 @@
 package org.example.restspringbootudemy.config;
 
-import org.example.restspringbootudemy.converters.YamlJackson2HttpMessageConverter;
+import org.example.restspringbootudemy.config.serialization.YamlJackson2HttpMessageConverter;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.MediaType;

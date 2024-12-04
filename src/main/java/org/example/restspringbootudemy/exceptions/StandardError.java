@@ -1,4 +1,4 @@
-package org.example.restspringbootudemy.controllers.exceptions;
+package org.example.restspringbootudemy.exceptions;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.AllArgsConstructor;

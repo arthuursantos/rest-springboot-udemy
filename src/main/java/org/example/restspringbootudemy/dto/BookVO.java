@@ -1,4 +1,4 @@
-package org.example.restspringbootudemy.data.vo.v1;
+package org.example.restspringbootudemy.dto;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonProperty;

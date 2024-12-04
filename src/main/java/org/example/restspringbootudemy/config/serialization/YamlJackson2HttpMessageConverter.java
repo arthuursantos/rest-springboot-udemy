@@ -1,4 +1,4 @@
-package org.example.restspringbootudemy.converters;
+package org.example.restspringbootudemy.config.serialization;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
 import org.springframework.http.MediaType;

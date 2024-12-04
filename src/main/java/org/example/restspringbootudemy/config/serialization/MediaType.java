@@ -1,4 +1,4 @@
-package org.example.restspringbootudemy.util;
+package org.example.restspringbootudemy.config.serialization;
 
 public class MediaType {
     public static final String APPLICATION_JSON = "application/json";

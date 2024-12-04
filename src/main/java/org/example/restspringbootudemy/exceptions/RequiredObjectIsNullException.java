@@ -1,4 +1,4 @@
-package org.example.restspringbootudemy.controllers.exceptions;
+package org.example.restspringbootudemy.exceptions;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.ResponseStatus;

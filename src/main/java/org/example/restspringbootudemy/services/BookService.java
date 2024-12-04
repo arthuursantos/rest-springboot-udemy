@@ -1,13 +1,12 @@
 package org.example.restspringbootudemy.services;
 
 import org.example.restspringbootudemy.controllers.BookController;
-import org.example.restspringbootudemy.controllers.exceptions.RequiredObjectIsNullException;
-import org.example.restspringbootudemy.controllers.exceptions.ResourceNotFoundException;
-import org.example.restspringbootudemy.data.vo.v1.BookVO;
+import org.example.restspringbootudemy.exceptions.RequiredObjectIsNullException;
+import org.example.restspringbootudemy.exceptions.ResourceNotFoundException;
+import org.example.restspringbootudemy.dto.BookVO;
 import org.example.restspringbootudemy.entities.Book;
-import org.example.restspringbootudemy.mapper.DozerMapper;
+import org.example.restspringbootudemy.services.mapper.DozerMapper;
 import org.example.restspringbootudemy.repositories.BookRepository;
-import org.springdoc.core.converters.ResponseSupportConverter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

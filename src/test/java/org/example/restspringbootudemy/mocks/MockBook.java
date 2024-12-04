@@ -1,6 +1,6 @@
 package org.example.restspringbootudemy.mocks;
 
-import org.example.restspringbootudemy.data.vo.v1.BookVO;
+import org.example.restspringbootudemy.dto.BookVO;
 import org.example.restspringbootudemy.entities.Book;
 
 import java.time.LocalDate;

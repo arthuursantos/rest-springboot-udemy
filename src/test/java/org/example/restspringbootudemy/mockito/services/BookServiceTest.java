@@ -1,6 +1,6 @@
 package org.example.restspringbootudemy.mockito.services;
 
-import org.example.restspringbootudemy.controllers.exceptions.RequiredObjectIsNullException;
+import org.example.restspringbootudemy.exceptions.RequiredObjectIsNullException;
 import org.example.restspringbootudemy.mocks.MockBook;
 import org.example.restspringbootudemy.repositories.BookRepository;
 import org.example.restspringbootudemy.services.BookService;

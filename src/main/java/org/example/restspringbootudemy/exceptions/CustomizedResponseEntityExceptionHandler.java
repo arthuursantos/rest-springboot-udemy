@@ -1,4 +1,4 @@
-package org.example.restspringbootudemy.controllers.exceptions;
+package org.example.restspringbootudemy.exceptions;
 
 import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.http.HttpStatus;
@@ -41,6 +41,18 @@ public class CustomizedResponseEntityExceptionHandler extends ResponseEntityExce
     @ExceptionHandler(RequiredObjectIsNullException.class)
     public ResponseEntity<StandardError> handleRequiredObjectIsNullExceptions(Exception ex, HttpServletRequest request) {
         HttpStatus status = HttpStatus.BAD_REQUEST;
+        StandardError error = StandardError.builder()
+                .timestamp(Instant.now())
+                .status(status.value())
+                .message(ex.getMessage())
+                .path(request.getRequestURI())
+                .build();
+        return new ResponseEntity<>(error, status);
+    }
+
+    @ExceptionHandler(InvalidJwtAuthenticationException.class)
+    public ResponseEntity<StandardError> handleInvalidJwtAuthenticationExceptions(Exception ex, HttpServletRequest request) {
+        HttpStatus status = HttpStatus.FORBIDDEN;
         StandardError error = StandardError.builder()
                 .timestamp(Instant.now())
                 .status(status.value())

@@ -3,7 +3,7 @@ package org.example.restspringbootudemy.mocks;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.example.restspringbootudemy.data.vo.v1.PersonVO;
+import org.example.restspringbootudemy.dto.PersonVO;
 import org.example.restspringbootudemy.entities.Person;
 
 public class MockPerson {

@@ -1,11 +1,11 @@
 package org.example.restspringbootudemy.services;
 
 import org.example.restspringbootudemy.controllers.PersonController;
-import org.example.restspringbootudemy.controllers.exceptions.RequiredObjectIsNullException;
-import org.example.restspringbootudemy.controllers.exceptions.ResourceNotFoundException;
-import org.example.restspringbootudemy.data.vo.v1.PersonVO;
+import org.example.restspringbootudemy.exceptions.RequiredObjectIsNullException;
+import org.example.restspringbootudemy.exceptions.ResourceNotFoundException;
+import org.example.restspringbootudemy.dto.PersonVO;
 import org.example.restspringbootudemy.entities.Person;
-import org.example.restspringbootudemy.mapper.DozerMapper;
+import org.example.restspringbootudemy.services.mapper.DozerMapper;
 import org.example.restspringbootudemy.repositories.PersonRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
