@@ -1,8 +1,11 @@
 package org.example.restspringbootudemy.entities;
 
 import jakarta.persistence.*;
-import lombok.*;
-import org.hibernate.proxy.HibernateProxy;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+import org.springframework.security.core.GrantedAuthority;
 
 import java.io.Serializable;
 import java.util.Objects;
@@ -13,31 +16,32 @@ import java.util.Objects;
 @AllArgsConstructor
 
 @Entity
-@Table(name = "person")
-public class Person implements Serializable {
+@Table(name = "permission")
+public class Permission implements GrantedAuthority, Serializable {
+
     private static final long serialVersionUID = 1L;
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    @Column(name = "first_name", nullable = false, length = 50)
-    private String firstName;
-    @Column(name = "last_name", nullable = false, length = 50)
-    private String lastName;
-    @Column(nullable = false, length = 100)
-    private String address;
-    @Column(nullable = false, length = 50)
-    private String email;
+    @Column(nullable = false, length = 255)
+    private String description;
+
+    @Override
+    public String getAuthority() {
+        return this.description;
+    }
 
     @Override
     public boolean equals(Object o) {
         if (o == null || getClass() != o.getClass()) return false;
-        Person person = (Person) o;
-        return Objects.equals(id, person.id);
+        Permission that = (Permission) o;
+        return Objects.equals(id, that.id);
     }
 
     @Override
     public int hashCode() {
         return Objects.hashCode(id);
     }
+
 }
