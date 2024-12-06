@@ -4,7 +4,7 @@ security:
   jwt:
     token:
       secret-key: 51bp09
-      expire-lenght: 3600000
+      expire-length: 3600000
 spring:
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
@@ -20,6 +20,8 @@ spring:
     serialization:
       write-dates-as-timestamps: false
 springdoc:
-  paths-to-match: /api/**/v1/**
+  paths-to-match: 
+    - /auth/**
+    - /api/**
   swagger-ui:
     use-root-path: true
