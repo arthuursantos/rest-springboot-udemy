@@ -1,5 +1,6 @@
 package org.example.restspringbootudemy.services;
 
+import jakarta.transaction.Transactional;
 import org.example.restspringbootudemy.controllers.PersonController;
 import org.example.restspringbootudemy.exceptions.RequiredObjectIsNullException;
 import org.example.restspringbootudemy.exceptions.ResourceNotFoundException;
@@ -61,6 +62,17 @@ public class PersonService {
         entity.setAddress(person.getAddress());
         PersonVO vo = DozerMapper.parseObject(repository.save(entity), PersonVO.class);
         vo.add(linkTo(methodOn(PersonController.class).findById(vo.getKey())).withSelfRel());
+        return vo;
+    }
+
+    @Transactional
+    public PersonVO disable(Long id) {
+        logger.info("Disabling Person by ID " + id);
+        repository.disable(id);
+        Person entity = repository.findById(id)
+                .orElseThrow(() -> new ResourceNotFoundException("No records found for this ID."));
+        PersonVO vo = DozerMapper.parseObject(entity, PersonVO.class);
+        vo.add(linkTo(methodOn(PersonController.class).findById(id)).withSelfRel());
         return vo;
     }
 

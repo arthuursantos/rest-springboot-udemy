@@ -28,6 +28,8 @@ public class Person implements Serializable {
     private String address;
     @Column(nullable = false, length = 50)
     private String email;
+    @Column(nullable = false)
+    private Boolean enabled;
 
     @Override
     public boolean equals(Object o) {

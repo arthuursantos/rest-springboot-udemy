@@ -26,6 +26,7 @@ public class PersonVO extends RepresentationModel<PersonVO> implements Serializa
     private String lastName;
     private String address;
     private String email;
+    private Boolean enabled;
 
     @Override
     public final boolean equals(Object o) {

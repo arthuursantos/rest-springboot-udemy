@@ -20,7 +20,7 @@ public class Application {
 //        encoders.put("pbkdf2", pbkdf2encoder);
 //        DelegatingPasswordEncoder passwordEncoder = new DelegatingPasswordEncoder("pbkdf2", encoders);
 //        passwordEncoder.setDefaultPasswordEncoderForMatches(pbkdf2encoder);
-//        String hash1 = passwordEncoder.encode("sacola07");
+//        String hash1 = passwordEncoder.encode("SENHA PARA ENCRIPTAR");
 //        System.out.println("My hash1 " + hash1);
 
     }
