@@ -9,6 +9,8 @@ import org.example.restspringbootudemy.entities.Person;
 import org.example.restspringbootudemy.services.mapper.DozerMapper;
 import org.example.restspringbootudemy.repositories.PersonRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -25,12 +27,12 @@ public class PersonService {
 
     private Logger logger = Logger.getLogger(PersonService.class.getName());
 
-    public List<PersonVO> findAll() {
+    public Page<PersonVO> findAll(Pageable pageable) {
         logger.info("Finding all Person");
-        var persons = DozerMapper.parseList(repository.findAll(), PersonVO.class);
-        persons
-                .forEach(p -> p.add(linkTo(methodOn(PersonController.class).findById(p.getKey())).withSelfRel()));
-        return persons;
+        var personsPage = repository.findAll(pageable);
+        return personsPage
+                .map(p -> DozerMapper.parseObject(p, PersonVO.class))
+                .map(p -> p.add(linkTo(methodOn(PersonController.class).findById(p.getKey())).withSelfRel()));
     }
 
     public PersonVO findById(Long id) {
