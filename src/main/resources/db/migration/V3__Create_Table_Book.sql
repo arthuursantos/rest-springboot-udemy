@@ -3,5 +3,5 @@
   `author` varchar(100),
   `launch_date` datetime NOT NULL,
   `price` decimal NOT NULL,
-  `title` varchar(100)
+  `title` varchar(200)
 );
