@@ -51,6 +51,17 @@ public class PersonService {
         return vo;
     }
 
+    public PagedModel<EntityModel<PersonVO>> findByName(String firstName, Pageable pageable) {
+        logger.info("Finding Person by firstName");
+        var personsPage = repository.findByFirstNameIgnoreCase(firstName, pageable);
+        var personsPageVO = personsPage
+                .map(p -> DozerMapper.parseObject(p, PersonVO.class))
+                .map(p -> p.add(linkTo(methodOn(PersonController.class).findById(p.getKey())).withSelfRel()));
+        return assembler.toModel(
+                personsPageVO,
+                linkTo(methodOn(PersonController.class).findAll(pageable.getPageNumber(), pageable.getPageSize(), "asc")).withSelfRel());
+    }
+
     public PersonVO create(PersonVO person) {
         if (person == null) throw new RequiredObjectIsNullException();
         logger.info("Creating person!");
