@@ -2,7 +2,10 @@ package org.example.restspringbootudemy.services;
 
 import org.example.restspringbootudemy.config.FileStorageConfig;
 import org.example.restspringbootudemy.exceptions.FileStorageException;
+import org.example.restspringbootudemy.exceptions.MyFileNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.io.Resource;
+import org.springframework.core.io.UrlResource;
 import org.springframework.stereotype.Service;
 import org.springframework.util.StringUtils;
 import org.springframework.web.multipart.MultipartFile;
@@ -38,6 +41,17 @@ public class FileStorageService {
             return filename;
         } catch (Exception e) {
             throw new FileStorageException("Could not store the file: " + filename, e);
+        }
+    }
+
+    public Resource loadFileAsResource(String filename) {
+        try {
+            Path filepath = this.root.resolve(filename).normalize();
+            Resource resource = new UrlResource(filepath.toUri());
+            if (resource.exists()) return resource;
+            else throw new MyFileNotFoundException("File not found: " + filename);
+        } catch (Exception e) {
+            throw new MyFileNotFoundException("File not found: " + filename, e);
         }
     }
 
