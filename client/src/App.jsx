@@ -1,10 +1,10 @@
-import '../index.css';
-import Login from "./pages/login/Login.jsx";
+import './index.css';
+import Routes from './routes.jsx';
 
 export default function App() {
   return (
     <>
-        <Login/>
+        <Routes />
     </>
   )
 }

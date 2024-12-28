@@ -9,7 +9,7 @@ export default function Login() {
 
             <div className="bg-white/80 backdrop-blur-sm p-8 rounded-xl shadow-xl w-full max-w-md">
                 <div className="text-center mb-8">
-                    <h2 className="text-3xl font-bold text-gray-900">restspringboot-udemy</h2>
+                    <h2 className="text-3xl font-bold text-gray-900">rest-springboot-udemy</h2>
                     <p className="mt-1 text-sm text-gray-600">
                         Por favor, se identifique.
                     </p>
@@ -55,11 +55,13 @@ export default function Login() {
                         </div>
                     </div>
 
-                    <button
-                        type="submit"
-                        className="w-full flex justify-center py-2 px-4 border border-transparent rounded-lg shadow-sm text-sm font-medium text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
-                        Sign in
-                    </button>
+                    <div className="flex justify-center">
+                        <button
+                            type="submit"
+                            className="w-3/4 flex justify-center py-2 px-4 border border-transparent rounded-lg shadow-sm text-sm font-medium text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
+                            Entrar
+                        </button>
+                    </div>
 
                 </form>
             </div>
