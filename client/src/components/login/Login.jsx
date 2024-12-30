@@ -1,9 +1,33 @@
 import {useState} from 'react';
+import {useNavigate} from 'react-router-dom';
 import {Lock, Mail} from 'lucide-react';
+import api from "../../services/axios.js";
 
 export default function Login() {
+
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
+
+    const navigate = useNavigate();
+
+    async function login(e) {
+        e.preventDefault();
+        const data = {
+            username: username,
+            password: password,
+        }
+
+        try {
+            const response = await api.post('auth/signin', data);
+            localStorage.setItem('username', response.data.username);
+            localStorage.setItem('accessToken', response.data.token);
+            navigate('/books');
+        } catch (err) {
+            alert("Login failed! Try again.");
+            console.error(err);
+        }
+    }
+
     return (
         <div className="min-h-screen flex items-center justify-center p-4">
 
@@ -15,7 +39,7 @@ export default function Login() {
                     </p>
                 </div>
 
-                <form className="space-y-6 w-full max-w-sm">
+                <form onSubmit={login} className="space-y-6 w-full max-w-sm">
                     <div>
                         <label htmlFor="username" className="block text-sm font-medium text-gray-700">
                             Nome de usuário
