@@ -1,19 +1,30 @@
 import {useState, useEffect} from 'react';
 import { LogOut, Edit2, Trash2 } from 'lucide-react';
+import AddBookModal from './AddBookModal';
 
 export default function Book() {
     const [books, setBooks] = useState([]);
+    const [isModalOpen, setIsModalOpen] = useState(false);
 
     useEffect(() => {
         setBooks([
-            {id: 1, title: 'To Kill a Mockingbird', author: 'Harper Lee', price: 13.99, releaseDate: '12/04/2009'},
-            {id: 2, title: '1984', author: 'George Orwell', price: 21.99, releaseDate: '31/02/1982'},
-            {id: 3, title: 'The Great Gatsby', author: 'F. Scott Fitzgerald', price: 17.99, releaseDate: '08/10/2019'},
+            {id: 1, title: 'To Kill a Mockingbird', author: 'Harper Lee', price: 13.99, releaseDate: '2009-04-12'},
+            {id: 2, title: '1984', author: 'George Orwell', price: 21.99, releaseDate: '1982-02-31'},
+            {id: 3, title: 'The Great Gatsby', author: 'F. Scott Fitzgerald', price: 17.99, releaseDate: '2019-10-08'},
         ]);
     }, []);
 
     const handleAddBook = () => {
-        console.log('Add book clicked');
+        setIsModalOpen(true);
+    };
+
+    const handleSubmitBook = (bookData) => {
+        const newBook = {
+            id: books.length + 1,
+            ...bookData
+        };
+        setBooks([...books, newBook]);
+        setIsModalOpen(false);
     };
 
     const handleLogout = () => {
@@ -40,12 +51,8 @@ export default function Book() {
 
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
                 {books.map((book) => (
-                    // <div key={book.id} className="bg-white shadow-md rounded-lg p-6">
-                    //     <h2 className="text-xl font-semibold mb-2">{book.title}</h2>
-                    //     <p className="text-gray-600">by {book.author}</p>
-                    // </div>
                     <div key={book.id}
-                        className="bg-white rounded-lg border shadow-sm hover:shadow-md transition-shadow duration-300 overflow-hidden relative">
+                         className="bg-white rounded-lg border shadow-sm hover:shadow-md transition-shadow duration-300 overflow-hidden relative">
                         <div className="p-3 absolute top-2 right-2 flex flex-col space-y-2">
                             <button
                                 className="text-indigo-500 hover:text-indigo-800 transition-colors duration-300"
@@ -77,6 +84,12 @@ export default function Book() {
                     </div>
                 ))}
             </div>
+
+            <AddBookModal
+                isOpen={isModalOpen}
+                onClose={() => setIsModalOpen(false)}
+                onSubmit={handleSubmitBook}
+            />
         </div>
     );
 };
