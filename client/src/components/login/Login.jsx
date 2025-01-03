@@ -16,15 +16,13 @@ export default function Login() {
             username: username,
             password: password,
         }
-
         try {
             const response = await api.post('auth/signin', data);
             localStorage.setItem('username', response.data.username);
-            localStorage.setItem('accessToken', response.data.token);
+            localStorage.setItem('accessToken', response.data.accessToken);
             navigate('/books');
-        } catch (err) {
+        } catch {
             alert("Login failed! Try again.");
-            console.error(err);
         }
     }
 
@@ -86,7 +84,6 @@ export default function Login() {
                             Entrar
                         </button>
                     </div>
-
                 </form>
             </div>
         </div>

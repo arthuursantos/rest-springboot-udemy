@@ -1,15 +1,28 @@
 /* eslint-disable */
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { X } from 'lucide-react';
 import BookForm from './BookForm';
 
-export default function AddBookModal({ isOpen, onClose, onSubmit }) {
+export default function EditBookModal({ isOpen, onClose, onSubmit, book }) {
     const [formData, setFormData] = useState({
+        id: '',
         title: '',
         author: '',
         price: '',
         launch_date: ''
     });
+
+    useEffect(() => {
+        if (book) {
+            setFormData({
+                id: book.id,
+                title: book.title,
+                author: book.author,
+                price: book.price.toString(),
+                launch_date: book.launch_date
+            });
+        }
+    }, [book]);
 
     if (!isOpen) return null;
 
@@ -19,7 +32,7 @@ export default function AddBookModal({ isOpen, onClose, onSubmit }) {
             ...formData,
             price: parseFloat(formData.price)
         });
-        setFormData({ title: '', author: '', price: '', launch_date: '' });
+        setFormData({ id: '', title: '', author: '', price: '', launch_date: '' });
     };
 
     return (
@@ -32,14 +45,14 @@ export default function AddBookModal({ isOpen, onClose, onSubmit }) {
                     <X className="w-6 h-6" />
                 </button>
 
-                <h2 className="text-2xl font-bold mb-6">Add New Book</h2>
+                <h2 className="text-2xl font-bold mb-6">Edit Book</h2>
 
                 <BookForm
                     formData={formData}
                     setFormData={setFormData}
                     onSubmit={handleSubmit}
                     onCancel={onClose}
-                    submitText="Add Book"
+                    submitText="Save Changes"
                 />
             </div>
         </div>
